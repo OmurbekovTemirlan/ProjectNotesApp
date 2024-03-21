@@ -112,7 +112,6 @@ class OnBordingView: UIViewController {
             uipageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
-        
         OnBordingCollectionView.dataSource = self
         OnBordingCollectionView.delegate = self
         OnBordingCollectionView.register(OnBordingCell.self, forCellWithReuseIdentifier: OnBordingCell.cellId)
@@ -129,7 +128,6 @@ class OnBordingView: UIViewController {
         test()
     }
     
-    
     private func scrollToCurrentPage(animated: Bool) {
         let indexPath = IndexPath(item: currentPagess, section: 0)
         OnBordingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
@@ -137,10 +135,13 @@ class OnBordingView: UIViewController {
     }
     
     func test() {
+        
         guard OnBordingStucts.count > uipageControll.currentPage + 0 else { return }
         
         OnBordingCollectionView.isPagingEnabled = false
+        
         OnBordingCollectionView.scrollToItem(at: IndexPath(item: uipageControll.currentPage + 0, section: 0), at: .centeredHorizontally, animated: true)
+        
         OnBordingCollectionView.isPagingEnabled = true
     }
     
@@ -148,16 +149,11 @@ class OnBordingView: UIViewController {
         let vc = HomeView()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
-    
-    
-    
+ 
     @objc private func skipBtnTapped(_ sender: UIButton){
         let vc = HomeView()
-        
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 
@@ -171,15 +167,14 @@ extension OnBordingView: UICollectionViewDataSource, UICollectionViewDelegate{
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnBordingCell.cellId, for: indexPath) as! OnBordingCell
         cell.configure(with: OnBordingStucts[indexPath.row])
-        
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         uipageControll.currentPage = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width)
     }
-    
 }
+
 extension OnBordingView: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)

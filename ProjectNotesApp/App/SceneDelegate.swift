@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if UserDefaults.standard.bool(forKey: "IsOnBord") == true{
             initialViev = HomeView()
         }else {
-            initialViev = FirstVIew()
+            initialViev = OnBordingView()
         }
         
         let nav1 = UINavigationController(rootViewController: initialViev!)

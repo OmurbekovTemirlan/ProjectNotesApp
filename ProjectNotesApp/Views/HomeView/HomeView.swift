@@ -12,7 +12,7 @@ protocol HomeViewProtocol {
 }
 
 class HomeView: UIViewController {
-
+    
     private var notes: [String] = []
     
     private var controller: HomeControllerProtocol?
@@ -66,16 +66,16 @@ class HomeView: UIViewController {
         
         setupUI()
         controller?.onGetNotes()
-    navBarItem()
+        navBarItem()
         navigationItem.hidesBackButton = true
         
     }
-
-
-   
+    
+    
+    
     
     private func navBarItem(){
-       
+        
         navigationItem.title = "Главная"
         
         navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
@@ -125,7 +125,7 @@ extension HomeView: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         notes.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeViewCell.cellId, for: indexPath) as! HomeViewCell
         cell.setup(title: notes[indexPath.row])
@@ -139,7 +139,8 @@ extension HomeView: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.width - 60) / 2, height: 100)
     }
-    }
+}
+
 extension HomeView: HomeViewProtocol {
     func succsesNotes(notes: [String]){
         self.notes = notes

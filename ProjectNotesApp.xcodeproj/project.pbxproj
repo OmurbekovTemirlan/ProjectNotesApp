@@ -19,11 +19,11 @@
 		189E8D552BA4A3BD00429152 /* HomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D542BA4A3BD00429152 /* HomeViewCell.swift */; };
 		189E8D592BA60E1A00429152 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D582BA60E1A00429152 /* HomeController.swift */; };
 		189E8D5B2BA60E6800429152 /* HomeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D5A2BA60E6800429152 /* HomeModel.swift */; };
-		189E8D602BA8433F00429152 /* FirstVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D5F2BA8433F00429152 /* FirstVIew.swift */; };
-		189E8D622BA849B200429152 /* FirstViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D612BA849B200429152 /* FirstViewCell.swift */; };
-		189E8D642BA84D1300429152 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D632BA84D1300429152 /* FirstViewModel.swift */; };
+		189E8D602BA8433F00429152 /* OnBordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D5F2BA8433F00429152 /* OnBordingView.swift */; };
+		189E8D622BA849B200429152 /* OnBordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D612BA849B200429152 /* OnBordingCell.swift */; };
+		189E8D642BA84D1300429152 /* OnBordingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D632BA84D1300429152 /* OnBordingModel.swift */; };
 		189E8D662BAAE39C00429152 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D652BAAE39C00429152 /* SettingController.swift */; };
-		189E8D682BAB070500429152 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D672BAB070500429152 /* FirstViewController.swift */; };
+		189E8D682BAB070500429152 /* OnBordingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D672BAB070500429152 /* OnBordingController.swift */; };
 		189E8DB22BAC5B6C00429152 /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DB12BAC5B6C00429152 /* MTUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,11 +42,11 @@
 		189E8D542BA4A3BD00429152 /* HomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewCell.swift; sourceTree = "<group>"; };
 		189E8D582BA60E1A00429152 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		189E8D5A2BA60E6800429152 /* HomeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModel.swift; sourceTree = "<group>"; };
-		189E8D5F2BA8433F00429152 /* FirstVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstVIew.swift; sourceTree = "<group>"; };
-		189E8D612BA849B200429152 /* FirstViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewCell.swift; sourceTree = "<group>"; };
-		189E8D632BA84D1300429152 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
+		189E8D5F2BA8433F00429152 /* OnBordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBordingView.swift; sourceTree = "<group>"; };
+		189E8D612BA849B200429152 /* OnBordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBordingCell.swift; sourceTree = "<group>"; };
+		189E8D632BA84D1300429152 /* OnBordingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBordingModel.swift; sourceTree = "<group>"; };
 		189E8D652BAAE39C00429152 /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
-		189E8D672BAB070500429152 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		189E8D672BAB070500429152 /* OnBordingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBordingController.swift; sourceTree = "<group>"; };
 		189E8DB12BAC5B6C00429152 /* MTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +100,7 @@
 		189E4F7B2BA2ED4600972C5F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				189E8D5E2BA8432000429152 /* FirstViewInformation */,
+				189E8D5E2BA8432000429152 /* OnBordingInformation */,
 				189E8D562BA5FFAA00429152 /* HomeView */,
 				189E8D572BA5FFC700429152 /* SettingView */,
 			);
@@ -140,15 +140,15 @@
 			path = SettingView;
 			sourceTree = "<group>";
 		};
-		189E8D5E2BA8432000429152 /* FirstViewInformation */ = {
+		189E8D5E2BA8432000429152 /* OnBordingInformation */ = {
 			isa = PBXGroup;
 			children = (
-				189E8D5F2BA8433F00429152 /* FirstVIew.swift */,
-				189E8D612BA849B200429152 /* FirstViewCell.swift */,
-				189E8D672BAB070500429152 /* FirstViewController.swift */,
-				189E8D632BA84D1300429152 /* FirstViewModel.swift */,
+				189E8D5F2BA8433F00429152 /* OnBordingView.swift */,
+				189E8D612BA849B200429152 /* OnBordingCell.swift */,
+				189E8D672BAB070500429152 /* OnBordingController.swift */,
+				189E8D632BA84D1300429152 /* OnBordingModel.swift */,
 			);
-			path = FirstViewInformation;
+			path = OnBordingInformation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,7 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				189E8D682BAB070500429152 /* FirstViewController.swift in Sources */,
+				189E8D682BAB070500429152 /* OnBordingController.swift in Sources */,
 				189E8D662BAAE39C00429152 /* SettingController.swift in Sources */,
 				189E4F802BA3144E00972C5F /* SettingCell.swift in Sources */,
 				189E4F832BA32C1800972C5F /* SetttingModel.swift in Sources */,
@@ -230,11 +230,11 @@
 				189E4F7D2BA2ED7000972C5F /* SettingsView.swift in Sources */,
 				189E8DB22BAC5B6C00429152 /* MTUserDefaults.swift in Sources */,
 				189E8D592BA60E1A00429152 /* HomeController.swift in Sources */,
-				189E8D622BA849B200429152 /* FirstViewCell.swift in Sources */,
+				189E8D622BA849B200429152 /* OnBordingCell.swift in Sources */,
 				189E4F672BA2ECF800972C5F /* AppDelegate.swift in Sources */,
 				189E4F692BA2ECF800972C5F /* SceneDelegate.swift in Sources */,
-				189E8D602BA8433F00429152 /* FirstVIew.swift in Sources */,
-				189E8D642BA84D1300429152 /* FirstViewModel.swift in Sources */,
+				189E8D602BA8433F00429152 /* OnBordingView.swift in Sources */,
+				189E8D642BA84D1300429152 /* OnBordingModel.swift in Sources */,
 				189E8D5B2BA60E6800429152 /* HomeModel.swift in Sources */,
 				189E8D552BA4A3BD00429152 /* HomeViewCell.swift in Sources */,
 			);
