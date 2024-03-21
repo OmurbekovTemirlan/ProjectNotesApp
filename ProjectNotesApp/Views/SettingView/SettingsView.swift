@@ -11,12 +11,14 @@ protocol SettingViewProtocol: AnyObject{
    
 }
 
+
+
 class SettingsView: UIViewController {
     
     var controller: SettingControllerProtocol?
     
     
-   private lazy var dates: [Settings] = [Settings(nameLabel: "Язык", imageName: "language", discription: "Русский", type: .withRightBtn),
+   private lazy var dates: [Settings] = [Settings(nameLabel: "Язык", imageName: "globe", discription: "Русский", type: .withRightBtn),
                              Settings(nameLabel: "Темная тема", imageName: "moon", discription: "", type: .withSwitch),
                              Settings(nameLabel: "Очистить данные", imageName: "trash", discription: "", type: .usaul)]
     
@@ -39,12 +41,13 @@ class SettingsView: UIViewController {
     private func NavBarEdits() {
         
         navigationItem.title = "Настройки"
-        
+        navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
+
         
     
         let rightBarBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingBtnTapped))
         navigationItem.rightBarButtonItem = rightBarBtn
-        rightBarBtn.tintColor = .black
+        rightBarBtn.tintColor = UIColor(named: "OtherColor")
  
     }
     

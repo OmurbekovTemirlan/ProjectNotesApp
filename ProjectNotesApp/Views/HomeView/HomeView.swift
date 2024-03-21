@@ -28,7 +28,7 @@ class HomeView: UIViewController {
     private lazy var notesLabel: UILabel = {
         let view = UILabel()
         view.text = "Заметки"
-        view.textColor = UIColor(hex: "#262626")
+        view.textColor = UIColor(named: "OtherColor")
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -49,9 +49,9 @@ class HomeView: UIViewController {
     
     private lazy var addButton: UIButton = {
         let view = UIButton(type: .system)
-        view.backgroundColor = .red
+        view.backgroundColor = UIColor(named: "pluus")
         view.setTitle("+", for: .normal)
-        view.setTitleColor(.white, for: .normal)
+        view.setTitleColor(UIColor(named: "BackraundColor"), for: .normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         view.layer.cornerRadius = 42 / 2
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -66,40 +66,25 @@ class HomeView: UIViewController {
         
         setupUI()
         controller?.onGetNotes()
-    
+    navBarItem()
         navigationItem.hidesBackButton = true
         
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let isDarkTheme = UserDefaults.standard.bool(forKey: "isDarkTheme")
-        
-        if isDarkTheme == true {
-            view.overrideUserInterfaceStyle = .dark
-        }else{
-            view.overrideUserInterfaceStyle = .light
-        }
-        navBarItem(isDarkTheme: isDarkTheme)
-    }
+
    
     
-    private func navBarItem(isDarkTheme: Bool){
+    private func navBarItem(){
+       
         navigationItem.title = "Главная"
         
-        if isDarkTheme == true {
-            navigationController?.navigationBar.tintColor = .white
-        }else{
-            
-            navigationController?.navigationBar.tintColor = .black
-
-        }
-        
-        navigationItem.titleView?.tintColor = .black
+        navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
         
         let settingRightBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingRightBarBTnTapped))
+        
         navigationItem.rightBarButtonItem = settingRightBtn
-        settingRightBtn.tintColor = .black
+        
+        settingRightBtn.tintColor = UIColor(named: "OtherColor")
         
     }
     

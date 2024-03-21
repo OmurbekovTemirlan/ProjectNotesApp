@@ -24,6 +24,7 @@
 		189E8D642BA84D1300429152 /* FirstViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D632BA84D1300429152 /* FirstViewModel.swift */; };
 		189E8D662BAAE39C00429152 /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D652BAAE39C00429152 /* SettingController.swift */; };
 		189E8D682BAB070500429152 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8D672BAB070500429152 /* FirstViewController.swift */; };
+		189E8DB22BAC5B6C00429152 /* MTUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DB12BAC5B6C00429152 /* MTUserDefaults.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		189E8D632BA84D1300429152 /* FirstViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewModel.swift; sourceTree = "<group>"; };
 		189E8D652BAAE39C00429152 /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		189E8D672BAB070500429152 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		189E8DB12BAC5B6C00429152 /* MTUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTUserDefaults.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				189E4F7C2BA2ED7000972C5F /* SettingsView.swift */,
 				189E4F7F2BA3144E00972C5F /* SettingCell.swift */,
+				189E8DB12BAC5B6C00429152 /* MTUserDefaults.swift */,
 				189E8D652BAAE39C00429152 /* SettingController.swift */,
 				189E4F822BA32C1800972C5F /* SetttingModel.swift */,
 			);
@@ -225,6 +228,7 @@
 				189E4F862BA3448700972C5F /* Color.swift in Sources */,
 				189E4F6B2BA2ECF800972C5F /* HomeView.swift in Sources */,
 				189E4F7D2BA2ED7000972C5F /* SettingsView.swift in Sources */,
+				189E8DB22BAC5B6C00429152 /* MTUserDefaults.swift in Sources */,
 				189E8D592BA60E1A00429152 /* HomeController.swift in Sources */,
 				189E8D622BA849B200429152 /* FirstViewCell.swift in Sources */,
 				189E4F672BA2ECF800972C5F /* AppDelegate.swift in Sources */,

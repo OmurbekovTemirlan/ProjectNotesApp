@@ -19,6 +19,23 @@ struct Settings  {
     var discription: String
     var type: SettingType
 }
+enum Theme: Int{
+    case device
+    case dark
+    case light
+    
+    func getUSerInterfaceStyle() -> UIUserInterfaceStyle {
+        switch self{
+            
+        case .device:
+            return .unspecified
+        case .dark:
+            return .dark
+        case .light:
+            return .light
+        }
+    }
+}
 
 protocol SettingsCellDelegate: AnyObject{
     func didSwitchOn(isOn: Bool)
@@ -32,13 +49,13 @@ class SettingTableViewCell: UITableViewCell {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .black
         return view
         
     }()
     
     private lazy var image: UIImageView = {
         let view = UIImageView()
+        view.tintColor = UIColor(named: "OtherColor")
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
         
@@ -55,7 +72,7 @@ class SettingTableViewCell: UITableViewCell {
     lazy var switchControl: UISwitch = {
         let view = UISwitch()
         let isOn = UserDefaults.standard.bool(forKey: "isDarkTheme")
-        view.isOn = isOn
+        view.isOn = (MTUserDefaults.shared.theme.rawValue != 0)
         view.addTarget(self, action: #selector(changeBackraundSWitch), for: .valueChanged)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -97,6 +114,9 @@ class SettingTableViewCell: UITableViewCell {
     
     @objc private func changeBackraundSWitch(_ sender: UISwitch) {
         delegate?.didSwitchOn(isOn: switchControl.isOn)
+        
+        MTUserDefaults.shared.theme = switchControl.isOn ? .dark : .device
+        window?.overrideUserInterfaceStyle = MTUserDefaults.shared.theme.getUSerInterfaceStyle()
     }
     @objc private func russiuanBtnTapped(_ sender: UISwitch) {
 
@@ -104,7 +124,7 @@ class SettingTableViewCell: UITableViewCell {
 
     func setup(settings: Settings){
        
-        image.image = UIImage(named: settings.imageName)
+        image.image = UIImage(systemName: settings.imageName)
         label.text = settings.nameLabel
         
         if settings.type == .withRightBtn {

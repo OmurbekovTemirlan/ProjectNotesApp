@@ -15,7 +15,12 @@ class FirstVIew: UIViewController {
   
     var conttroller: FirstViewControllerProtocol?
     
-    var currentIndex = 1
+   
+    
+        var currentPagess: Int = 0
+ 
+
+   
     
     private lazy var informationsDatas: [FirstViewStruct] = [FirstViewStruct(image: "firstImage",
                                                                  biglabel: "Welcome to The Note",
@@ -33,12 +38,11 @@ class FirstVIew: UIViewController {
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 40
         layout.minimumInteritemSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isPagingEnabled = true
+        collectionView.isPagingEnabled = false
         return collectionView
     }()
 
@@ -46,8 +50,8 @@ class FirstVIew: UIViewController {
     private lazy var skipBtn: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Skip", for: .normal)
-        view.backgroundColor =  .white
-        view.setTitleColor(UIColor(hex: "#FF3D3D"), for: .normal)
+        view.backgroundColor = UIColor(named: "BackraundColor")
+        view.setTitleColor(UIColor(named: "OtherColor"), for: .normal)
         view.addTarget(self, action: #selector(skipBtnTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -56,14 +60,25 @@ class FirstVIew: UIViewController {
     private lazy var nextBtn: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Next", for: .normal)
-        view.backgroundColor = UIColor(hex: "#FF3D3D" )
+        view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1) /*UIColor(hex: "#FF3D3D" )*/
         view.layer.cornerRadius = 12
         view.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
-        view.addTarget(self, action: #selector(nextBtnTapped), for: .touchUpInside)
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    private lazy var uipageControll: UIPageControl = {
+        let view = UIPageControl()
+        view.numberOfPages = informationsDatas.count
+        view.pageIndicatorTintColor = .gray
+        view.currentPageIndicatorTintColor =  UIColor(named: "OtherColor")
+        view.hidesForSinglePage = false
+        view.backgroundStyle = .automatic
+        view.addTarget(self, action: #selector(nextButtonTapped), for: .valueChanged)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,7 +91,7 @@ class FirstVIew: UIViewController {
         view.addSubview(welcomeCollectionView)
         view.addSubview(skipBtn)
         view.addSubview(nextBtn)
-        
+        view.addSubview(uipageControll)
         NSLayoutConstraint.activate([
             welcomeCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             welcomeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -92,8 +107,9 @@ class FirstVIew: UIViewController {
             nextBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             nextBtn.heightAnchor.constraint(equalToConstant: 40),
             nextBtn.widthAnchor.constraint(equalToConstant: 160),
-
-        
+            
+            uipageControll.topAnchor.constraint(equalTo: nextBtn.topAnchor, constant: -130),
+            uipageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         
@@ -102,25 +118,32 @@ class FirstVIew: UIViewController {
         welcomeCollectionView.register(FirstViewCell.self, forCellWithReuseIdentifier: FirstViewCell.cellId)
     }
     
-    @objc private func nextBtnTapped(_ sender: UIButton){
-       
-        currentIndex += 1
-        if currentIndex < 3 {
-            welcomeCollectionView.isPrefetchingEnabled = false
-            welcomeCollectionView.scrollToItem(at: IndexPath(row: currentIndex, section: 0), at: .centeredHorizontally, animated: true)
-            welcomeCollectionView.isPrefetchingEnabled = true
-        }else{
-            navigationController?.pushViewController(HomeView(), animated: true)
+    @objc private func nextButtonTapped(_ seender: Any) {
+            UserDefaults.standard.set(true, forKey: "IsOnBord")
+            if currentPagess < informationsDatas.count - 1 {
+                currentPagess += 1
+                scrollToCurrentPage(animated: true)
+            } else {
+                transitionToHomeView()
+            }
+        
         }
         
-        
-//        let currentPage = welcomeCollectionView.contentOffset.x / welcomeCollectionView.frame.width
-//          let nextPage = min(CGFloat(informationsDatas.count - 1), currentPage + 1)
-//          let indexPath = IndexPath(item: Int(nextPage), section: 0)
-//          welcomeCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
-        
+    private func scrollToCurrentPage(animated: Bool) {
+        let indexPath = IndexPath(item: currentPagess, section: 0)
+        welcomeCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+        uipageControll.currentPage = currentPagess
     }
+
+        
+        private func transitionToHomeView() {
+            let vc = HomeView()
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
     
+    
+
     @objc private func skipBtnTapped(_ sender: UIButton){
         let vc = HomeView()
         
@@ -144,6 +167,9 @@ extension FirstVIew: UICollectionViewDataSource, UICollectionViewDelegate{
         return cell
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        uipageControll.currentPage = Int(scrollView.contentOffset.x / UIScreen.main.bounds.width)
+    }
     
 }
 extension FirstVIew: UICollectionViewDelegateFlowLayout{
@@ -151,5 +177,6 @@ extension FirstVIew: UICollectionViewDelegateFlowLayout{
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     }
+
 
 

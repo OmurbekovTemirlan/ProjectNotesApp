@@ -30,7 +30,6 @@ class FirstViewCell: UICollectionViewCell {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 22, weight: .bold)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = .black
         return view
     }()
     
@@ -38,7 +37,6 @@ class FirstViewCell: UICollectionViewCell {
         let view = UILabel()
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.textColor = UIColor(hex: "#40424C")
         view.textAlignment = .left
         view.numberOfLines = 4
         return view
@@ -59,7 +57,7 @@ class FirstViewCell: UICollectionViewCell {
         contentView.addSubview(littleLabel)
         
         NSLayoutConstraint.activate([
-            image.topAnchor.constraint(equalTo: topAnchor, constant: 190),
+            image.topAnchor.constraint(equalTo: topAnchor, constant: 150),
             image.centerXAnchor.constraint(equalTo: centerXAnchor),
             image.heightAnchor.constraint(equalToConstant: 150),
             image.widthAnchor.constraint(equalToConstant: 212),

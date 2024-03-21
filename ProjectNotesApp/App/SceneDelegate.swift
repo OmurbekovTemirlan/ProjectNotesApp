@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,24 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let initialViev: UIViewController?
         
-        if UserDefaults.standard.bool(forKey: "IsOnBord"){
-            
+        if UserDefaults.standard.bool(forKey: "IsOnBord") == true{
+            initialViev = HomeView()
+        }else {
+            initialViev = FirstVIew()
         }
         
-        let nav1 = UINavigationController(rootViewController: HomeView())
+        let nav1 = UINavigationController(rootViewController: initialViev!)
         window.rootViewController = nav1
-        
-        let isDarkTheme = UserDefaults.standard.bool(forKey: "isDarkTheme")
-        
-        if isDarkTheme == true {
-            window.overrideUserInterfaceStyle = .dark
-        }else{
-            window.overrideUserInterfaceStyle = .light
-        }
         
         window.makeKeyAndVisible()
         self.window = window
-        
+        window.overrideUserInterfaceStyle = MTUserDefaults.shared.theme.getUSerInterfaceStyle()
         
     }
 
