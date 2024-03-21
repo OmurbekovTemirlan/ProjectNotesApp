@@ -16,10 +16,10 @@ class FirstViewController: FirstViewControllerProtocol{
    
     
    
-    weak var view: FirstViewProtocol?
+    weak var view: OnBordingViewProtocol?
      var model: FirstViewModelProtocol?
     
-    init(view: FirstViewProtocol) {
+    init(view: OnBordingViewProtocol) {
         self.view = view
         self.model = FirstViewModel(controller: self)
     }

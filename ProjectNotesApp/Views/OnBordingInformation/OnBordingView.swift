@@ -7,45 +7,45 @@
 
 import UIKit
 
-protocol FirstViewProtocol: AnyObject{
+protocol OnBordingViewProtocol: AnyObject{
     
 }
 
-class FirstVIew: UIViewController {
-  
+class OnBordingView: UIViewController {
+    
     var conttroller: FirstViewControllerProtocol?
     
-   
     
-        var currentPagess: Int = 0
- 
-
-   
     
-    private lazy var informationsDatas: [FirstViewStruct] = [FirstViewStruct(image: "firstImage",
-                                                                 biglabel: "Welcome to The Note",
-                                                                 liitleLabel: "Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!"),
-                                                  FirstViewStruct(image: "seccondImage",
-                                                        biglabel: "Set Up Your Profile",
-                                                        liitleLabel: "Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals."),
-                                                  
-                                                  FirstViewStruct(image: "thirdImage",
-                                                                 biglabel: "Dive into The Note",
-                                                                 liitleLabel: "You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!")]
+    var currentPagess: Int = 0
     
-    private lazy var welcomeCollectionView: UICollectionView = {
+    
+    
+    
+    private lazy var OnBordingStucts: [OnBordingStruct] = [OnBordingStruct(image: "firstImage",
+                                                                           biglabel: "Welcome to The Note",
+                                                                           liitleLabel: "Welcome to The Note – your new companion for tasks, goals, health – all in one place. Let's get started!"),
+                                                           OnBordingStruct(image: "seccondImage",
+                                                                           biglabel: "Set Up Your Profile",
+                                                                           liitleLabel: "Now that you're with us, let's get to know each other better. Fill out your profile, share your interests, and set your goals."),
+                                                           
+                                                           OnBordingStruct(image: "thirdImage",
+                                                                           biglabel: "Dive into The Note",
+                                                                           liitleLabel: "You're fully equipped to dive into the world of The Note. Remember, we're here to assist you every step of the way. Ready to start? Let's go!")]
+    
+    private lazy var OnBordingCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 40
-        layout.minimumInteritemSpacing = 30
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.isPagingEnabled = false
+        collectionView.isPagingEnabled = true
         return collectionView
     }()
-
+    
     
     private lazy var skipBtn: UIButton = {
         let view = UIButton(type: .system)
@@ -70,7 +70,7 @@ class FirstVIew: UIViewController {
     
     private lazy var uipageControll: UIPageControl = {
         let view = UIPageControl()
-        view.numberOfPages = informationsDatas.count
+        view.numberOfPages = OnBordingStucts.count
         view.pageIndicatorTintColor = .gray
         view.currentPageIndicatorTintColor =  UIColor(named: "OtherColor")
         view.hidesForSinglePage = false
@@ -86,17 +86,17 @@ class FirstVIew: UIViewController {
         setupConstraints()
         
     }
-
+    
     private func setupConstraints(){
-        view.addSubview(welcomeCollectionView)
+        view.addSubview(OnBordingCollectionView)
         view.addSubview(skipBtn)
         view.addSubview(nextBtn)
         view.addSubview(uipageControll)
         NSLayoutConstraint.activate([
-            welcomeCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            welcomeCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            welcomeCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            welcomeCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            OnBordingCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            OnBordingCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            OnBordingCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            OnBordingCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             skipBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -133),
             skipBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -113,37 +113,45 @@ class FirstVIew: UIViewController {
         ])
         
         
-        welcomeCollectionView.dataSource = self
-        welcomeCollectionView.delegate = self
-        welcomeCollectionView.register(FirstViewCell.self, forCellWithReuseIdentifier: FirstViewCell.cellId)
+        OnBordingCollectionView.dataSource = self
+        OnBordingCollectionView.delegate = self
+        OnBordingCollectionView.register(OnBordingCell.self, forCellWithReuseIdentifier: OnBordingCell.cellId)
     }
     
     @objc private func nextButtonTapped(_ seender: Any) {
-            UserDefaults.standard.set(true, forKey: "IsOnBord")
-            if currentPagess < informationsDatas.count - 1 {
-                currentPagess += 1
-                scrollToCurrentPage(animated: true)
-            } else {
-                transitionToHomeView()
-            }
-        
+        UserDefaults.standard.set(true, forKey: "IsOnBord")
+        if currentPagess < OnBordingStucts.count - 1 {
+            currentPagess += 1
+            scrollToCurrentPage(animated: true)
+        } else {
+            transitionToHomeView()
         }
-        
+        test()
+    }
+    
+    
     private func scrollToCurrentPage(animated: Bool) {
         let indexPath = IndexPath(item: currentPagess, section: 0)
-        welcomeCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
+        OnBordingCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: animated)
         uipageControll.currentPage = currentPagess
     }
-
+    
+    func test() {
+        guard OnBordingStucts.count > uipageControll.currentPage + 0 else { return }
         
-        private func transitionToHomeView() {
-            let vc = HomeView()
-            navigationController?.pushViewController(vc, animated: true)
-        }
-        
+        OnBordingCollectionView.isPagingEnabled = false
+        OnBordingCollectionView.scrollToItem(at: IndexPath(item: uipageControll.currentPage + 0, section: 0), at: .centeredHorizontally, animated: true)
+        OnBordingCollectionView.isPagingEnabled = true
+    }
+    
+    private func transitionToHomeView() {
+        let vc = HomeView()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     
-
+    
+    
     @objc private func skipBtnTapped(_ sender: UIButton){
         let vc = HomeView()
         
@@ -153,17 +161,17 @@ class FirstVIew: UIViewController {
 }
 
 
-extension FirstVIew: UICollectionViewDataSource, UICollectionViewDelegate{
+extension OnBordingView: UICollectionViewDataSource, UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        informationsDatas.count
+        OnBordingStucts.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FirstViewCell.cellId, for: indexPath) as! FirstViewCell
-        cell.configure(with: informationsDatas[indexPath.row])
-       
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnBordingCell.cellId, for: indexPath) as! OnBordingCell
+        cell.configure(with: OnBordingStucts[indexPath.row])
+        
         return cell
     }
     
@@ -172,11 +180,11 @@ extension FirstVIew: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
 }
-extension FirstVIew: UICollectionViewDelegateFlowLayout{
+extension OnBordingView: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
-    }
+}
 
 
 

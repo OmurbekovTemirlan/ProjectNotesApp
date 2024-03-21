@@ -8,14 +8,14 @@
 import UIKit
 
 
-struct FirstViewStruct{
+struct OnBordingStruct{
     var image: String
     var biglabel: String
     var liitleLabel: String
 }
 
 
-class FirstViewCell: UICollectionViewCell {
+class OnBordingCell: UICollectionViewCell {
     
     static let cellId = "cell"
     
@@ -76,7 +76,7 @@ class FirstViewCell: UICollectionViewCell {
     }
 
     
-    func configure(with: FirstViewStruct){
+    func configure(with: OnBordingStruct){
         image.image = UIImage(named: with.image)
         bigLabel.text = with.biglabel
         littleLabel.text = with.liitleLabel
