@@ -108,7 +108,7 @@ class HomeView: UIViewController {
             notesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -133),
-            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addButton.widthAnchor.constraint(equalToConstant: 42),
             addButton.heightAnchor.constraint(equalToConstant: 42),
         ])
@@ -117,6 +117,8 @@ class HomeView: UIViewController {
     
     @objc private func settingRightBarBTnTapped(){
         let settingsVC =  SettingsView()
+        
+        
         navigationController?.pushViewController(settingsVC, animated: true)
     }
     
