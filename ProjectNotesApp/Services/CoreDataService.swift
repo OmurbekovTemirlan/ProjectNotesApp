@@ -27,7 +27,7 @@ class CoreDataService: NSObject {
     
     //creat
     func addNote(id: String, title: String, description: String, date: Date){
-        guard let noteEntity = NSEntityDescription.entity(forEntityName: "Notes", in: context) else {
+        guard let noteEntity = NSEntityDescription.entity(forEntityName: "Note", in: context) else {
             return
         }
         let note = Note(entity: noteEntity, insertInto: context)
@@ -40,7 +40,7 @@ class CoreDataService: NSObject {
     }
     // read
     func fetchNotes() -> [Note] {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Notes")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
         do {
             return try context.fetch(fetchRequest) as! [Note]
         } catch {

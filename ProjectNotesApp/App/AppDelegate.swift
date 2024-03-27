@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Notes")
+        let container = NSPersistentContainer(name: "Note")
         container.loadPersistentStores { description , error in
             if let error {
                 print(error.localizedDescription)

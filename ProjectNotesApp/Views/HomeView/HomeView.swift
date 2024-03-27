@@ -8,14 +8,15 @@
 import UIKit
 
 protocol HomeViewProtocol {
-    func succsesNotes(notes: [String])
+    func succsesNotes(notes: [Note])
 }
 
 class HomeView: UIViewController {
     
-    private var notes: [String] = []
-    
     private var controller: HomeControllerProtocol?
+
+    
+    private var notes: [Note] = []
     
     private lazy var noteSearchBar: UISearchBar = {
         let view = UISearchBar()
@@ -54,6 +55,7 @@ class HomeView: UIViewController {
         view.setTitleColor(UIColor(named: "BackraundColor"), for: .normal)
         view.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         view.layer.cornerRadius = 42 / 2
+        view.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
         
@@ -66,12 +68,20 @@ class HomeView: UIViewController {
         
         setupUI()
         controller?.onGetNotes()
-        navBarItem()
+        
         navigationItem.hidesBackButton = true
         
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        controller?.onGetNotes()
+        navBarItem()
+    }
     
-    
+    @objc private func addButtonTapped(){
+        let addVc = AddNoteView()
+        navigationController?.pushViewController(addVc, animated: true)
+    }
     
     
     private func navBarItem(){
@@ -130,7 +140,7 @@ extension HomeView: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeViewCell.cellId, for: indexPath) as! HomeViewCell
-        cell.setup(title: notes[indexPath.row])
+        cell.setup(title: notes[indexPath.row].title ?? "")
         
         return cell
     }
@@ -144,7 +154,7 @@ extension HomeView: UICollectionViewDelegateFlowLayout{
 }
 
 extension HomeView: HomeViewProtocol {
-    func succsesNotes(notes: [String]){
+    func succsesNotes(notes: [Note]){
         self.notes = notes
         notesCollectionView.reloadData()
     }

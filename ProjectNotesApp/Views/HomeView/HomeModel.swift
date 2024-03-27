@@ -17,7 +17,9 @@ class HomeModel: HomeModelProtocol {
     
     var controller: HomeControllerProtocol?
     
-    var notes: [String] = ["School Notes", "Funny Jokes", "Read Books", "Buy Products", "My Plans", "Information" ]
+    private let coreDataService = CoreDataService.shared
+    
+    var notes: [Note] = []
 
     
     init(controller: HomeControllerProtocol) {
@@ -26,6 +28,7 @@ class HomeModel: HomeModelProtocol {
     
     
     func getNotes(){
+        notes = coreDataService.fetchNotes()
         controller?.onSuccsesNotes(notes: notes)
     }
 }

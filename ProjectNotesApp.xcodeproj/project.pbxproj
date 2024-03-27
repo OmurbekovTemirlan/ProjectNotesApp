@@ -30,6 +30,8 @@
 		189E8DBE2BB21A6E00429152 /* Notes+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DBC2BB21A6E00429152 /* Notes+CoreDataProperties.swift */; };
 		189E8DC12BB21B3900429152 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DC02BB21B3900429152 /* CoreDataService.swift */; };
 		189E8DC42BB2305300429152 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DC32BB2305300429152 /* AddNoteView.swift */; };
+		189E8DC62BB4440300429152 /* AddNoteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DC52BB4440300429152 /* AddNoteController.swift */; };
+		189E8DC82BB4441C00429152 /* AddNoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DC72BB4441C00429152 /* AddNoteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		189E8DBC2BB21A6E00429152 /* Notes+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notes+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		189E8DC02BB21B3900429152 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		189E8DC32BB2305300429152 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
+		189E8DC52BB4440300429152 /* AddNoteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteController.swift; sourceTree = "<group>"; };
+		189E8DC72BB4441C00429152 /* AddNoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +96,8 @@
 		189E4F652BA2ECF800972C5F /* ProjectNotesApp */ = {
 			isa = PBXGroup;
 			children = (
-				189E8DBF2BB21B0700429152 /* Services */,
 				189E4F7A2BA2ED3900972C5F /* App */,
+				189E8DBF2BB21B0700429152 /* Services */,
 				189E4F7B2BA2ED4600972C5F /* Views */,
 				189E4F842BA3446500972C5F /* Recource */,
 				189E4F742BA2ECFE00972C5F /* Info.plist */,
@@ -178,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				189E8DC32BB2305300429152 /* AddNoteView.swift */,
+				189E8DC52BB4440300429152 /* AddNoteController.swift */,
+				189E8DC72BB4441C00429152 /* AddNoteModel.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -265,10 +271,12 @@
 				189E8D622BA849B200429152 /* OnBordingCell.swift in Sources */,
 				189E4F672BA2ECF800972C5F /* AppDelegate.swift in Sources */,
 				189E8DC42BB2305300429152 /* AddNoteView.swift in Sources */,
+				189E8DC82BB4441C00429152 /* AddNoteModel.swift in Sources */,
 				189E8DC12BB21B3900429152 /* CoreDataService.swift in Sources */,
 				189E4F692BA2ECF800972C5F /* SceneDelegate.swift in Sources */,
 				189E8DBD2BB21A6E00429152 /* Notes+CoreDataClass.swift in Sources */,
 				189E8D602BA8433F00429152 /* OnBordingView.swift in Sources */,
+				189E8DC62BB4440300429152 /* AddNoteController.swift in Sources */,
 				189E8D642BA84D1300429152 /* OnBordingModel.swift in Sources */,
 				189E8D5B2BA60E6800429152 /* HomeModel.swift in Sources */,
 				189E8D552BA4A3BD00429152 /* HomeViewCell.swift in Sources */,

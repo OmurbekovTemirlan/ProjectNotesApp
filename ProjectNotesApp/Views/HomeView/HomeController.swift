@@ -11,7 +11,7 @@ protocol HomeControllerProtocol{
     
     func onGetNotes()
     
-    func onSuccsesNotes(notes: [String])
+    func onSuccsesNotes(notes: [Note])
 }
 
 class HomeController: HomeControllerProtocol {
@@ -28,7 +28,7 @@ class HomeController: HomeControllerProtocol {
         model?.getNotes()
     }
     
-    func onSuccsesNotes(notes: [String]){
+    func onSuccsesNotes(notes: [Note]){
         view?.succsesNotes(notes: notes)
     }
 }
