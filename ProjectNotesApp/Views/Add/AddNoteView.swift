@@ -16,6 +16,8 @@ class AddNoteView: UIViewController {
     
     private var controller: AddNoteControllerProtocol?
     
+    private var notes:Note?
+    
     private lazy var noteSearchBar: UISearchBar = {
         let view = UISearchBar()
         view.placeholder = "Название"
@@ -29,6 +31,9 @@ class AddNoteView: UIViewController {
         view.text = ""
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.backgroundColor = .systemGray6
+        if let notes = notes{
+            view.text = notes.title
+        }
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -57,6 +62,11 @@ class AddNoteView: UIViewController {
         navigationItem.title = "Заметки"
         
         navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
+        
+        let rightBtnItm = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .plain, target: self, action: #selector(deleteBtnTapped))
+    }
+    @objc private func deleteBtnTapped(){
+        
     }
     
     private func setupContriants(){
@@ -80,6 +90,10 @@ class AddNoteView: UIViewController {
             saveBtn.heightAnchor.constraint(equalToConstant: 40),
             saveBtn.widthAnchor.constraint(equalToConstant: 160),
         ])
+    }
+    
+    func setNote(note: Note){
+        self.notes = note
     }
     
     

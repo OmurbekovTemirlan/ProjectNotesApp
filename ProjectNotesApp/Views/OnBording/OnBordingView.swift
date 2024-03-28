@@ -117,16 +117,32 @@ class OnBordingView: UIViewController {
         OnBordingCollectionView.register(OnBordingCell.self, forCellWithReuseIdentifier: OnBordingCell.cellId)
     }
     
-    @objc private func nextButtonTapped(_ seender: Any) {
-        UserDefaults.standard.set(true, forKey: "IsOnBord")
+    @objc private func nextButtonTapped(_ sender: Any) {
+        if currentPagess == 1 { 
+            UserDefaults.standard.set(true, forKey: "IsOnBord")
+        }
+        
         if currentPagess < OnBordingStucts.count - 1 {
             currentPagess += 1
             scrollToCurrentPage(animated: true)
         } else {
             transitionToHomeView()
         }
+        
         test()
     }
+
+    
+//    @objc private func nextButtonTapped(_ seender: Any) {
+//        UserDefaults.standard.set(true, forKey: "IsOnBord")
+//        if currentPagess < OnBordingStucts.count - 1 {
+//            currentPagess += 1
+//            scrollToCurrentPage(animated: true)
+//        } else {
+//            transitionToHomeView()
+//        }
+//        test()
+//    }
     
     private func scrollToCurrentPage(animated: Bool) {
         let indexPath = IndexPath(item: currentPagess, section: 0)

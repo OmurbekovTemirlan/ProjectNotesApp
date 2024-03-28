@@ -78,6 +78,7 @@ class HomeView: UIViewController {
         navBarItem()
     }
     
+    
     @objc private func addButtonTapped(){
         let addVc = AddNoteView()
         navigationController?.pushViewController(addVc, animated: true)
@@ -150,6 +151,11 @@ extension HomeView: UICollectionViewDataSource{
 extension HomeView: UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (view.frame.width - 60) / 2, height: 100)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let addNoteViewC = AddNoteView()
+        
+        navigationController?.pushViewController(addNoteViewC, animated: true)
     }
 }
 

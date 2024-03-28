@@ -91,7 +91,7 @@ extension SettingsView: UITableViewDataSource {
         
         let cell = settingsTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SettingTableViewCell
         cell.setup(settings: dates[indexPath.row])
-        cell.delegate = self
+//        cell.delegate = self
         return cell
     }
 }
@@ -99,20 +99,29 @@ extension SettingsView: UITableViewDelegate  {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         51
     }
-}
-
-extension SettingsView: SettingsCellDelegate{
-    func didSwitchOn(isOn: Bool) {
- 
-        UserDefaults.standard.setValue(isOn, forKey: "isDarkTheme")
-        
-        if isOn == true {
-            view.overrideUserInterfaceStyle = .dark
-        }else{
-            view.overrideUserInterfaceStyle = .light
-        }
-            
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //        if indexPath.row == 2 {
+    //            let alert = UIAlertController(title: "Удаление", message: "Вы уверены, что хотите удалить все заметки?", preferredStyle: .alert)
+    //            let acceptAction = UIAlertAction(title: "Да", style: .destructive)
+    //            let decAction =
+    //
+    //        }
+    //    }
     }
     
-    
-}
+    extension SettingsView: SettingsCellDelegate{
+        func didSwitchOn(isOn: Bool) {
+            
+            UserDefaults.standard.setValue(isOn, forKey: "isDarkTheme")
+            
+            if isOn == true {
+                view.overrideUserInterfaceStyle = .dark
+            }else{
+                view.overrideUserInterfaceStyle = .light
+            }
+            
+        }
+        
+        
+    }
+
