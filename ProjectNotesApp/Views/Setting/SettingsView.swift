@@ -13,7 +13,7 @@ protocol SettingViewProtocol: AnyObject{
 
 
 
-class SettingsView: UIViewController {
+class SettingsView: UIViewController, SettingViewProtocol {
     
     var controller: SettingControllerProtocol?
     
@@ -31,8 +31,8 @@ class SettingsView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-       NavBarEdits()
-//        controller = SettingController(settingView: self)
+        NavBarEdits()
+        controller = SettingController(settingView: self)
         setupTableView()
     }
     
@@ -45,9 +45,9 @@ class SettingsView: UIViewController {
 
         
     
-        let rightBarBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingBtnTapped))
-        navigationItem.rightBarButtonItem = rightBarBtn
-        rightBarBtn.tintColor = UIColor(named: "OtherColor")
+//        let rightBarBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingBtnTapped))
+//        navigationItem.rightBarButtonItem = rightBarBtn
+//        rightBarBtn.tintColor = UIColor(named: "OtherColor")
  
     }
     
@@ -91,7 +91,7 @@ extension SettingsView: UITableViewDataSource {
         
         let cell = settingsTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SettingTableViewCell
         cell.setup(settings: dates[indexPath.row])
-//        cell.delegate = self
+        cell.delegate = self
         return cell
     }
 }
@@ -99,14 +99,27 @@ extension SettingsView: UITableViewDelegate  {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         51
     }
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //        if indexPath.row == 2 {
-    //            let alert = UIAlertController(title: "Удаление", message: "Вы уверены, что хотите удалить все заметки?", preferredStyle: .alert)
-    //            let acceptAction = UIAlertAction(title: "Да", style: .destructive)
-    //            let decAction =
-    //
-    //        }
-    //    }
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if indexPath.row == 0 {
+               let vc = LanguageView()
+                present(vc, animated: true)
+            }
+            
+            if indexPath.row == 2 {
+                
+                let alert = UIAlertController(title: "Удаление", message: "Вы уверены, что хотите удалить все заметки?", preferredStyle: .alert)
+                
+                let acceptAction = UIAlertAction(title: "Да", style: .destructive)
+                { action in self.controller?.onDeleteNotes() }
+                    
+                let declineAction = UIAlertAction(title: "Нет", style: .cancel)
+                
+                alert.addAction(acceptAction)
+                alert.addAction(declineAction)
+              
+                present(alert, animated: true)
+            }
+        }
     }
     
     extension SettingsView: SettingsCellDelegate{
@@ -119,9 +132,6 @@ extension SettingsView: UITableViewDelegate  {
             }else{
                 view.overrideUserInterfaceStyle = .light
             }
-            
         }
-        
-        
     }
 

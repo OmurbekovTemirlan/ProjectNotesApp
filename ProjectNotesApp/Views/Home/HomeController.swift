@@ -10,8 +10,9 @@ import UIKit
 protocol HomeControllerProtocol{
     
     func onGetNotes()
-    
     func onSuccsesNotes(notes: [Note])
+    func onSearchNotes(text: String)
+    
 }
 
 class HomeController: HomeControllerProtocol {
@@ -31,4 +32,9 @@ class HomeController: HomeControllerProtocol {
     func onSuccsesNotes(notes: [Note]){
         view?.succsesNotes(notes: notes)
     }
+    
+    func onSearchNotes(text: String) {
+        model?.SearchNotes(text: text)
+    }
+    
 }

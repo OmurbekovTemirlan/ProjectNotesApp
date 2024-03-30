@@ -8,18 +8,19 @@
 import UIKit
 
 protocol SettingControllerProtocol: AnyObject{
-    
-   
+    func onDeleteNotes()
 }
 
 class SettingController: SettingControllerProtocol {
-     
+   
    weak var settingView: SettingViewProtocol?
     var model: SettingModelProtocol?
     init(settingView: SettingViewProtocol) {
         self.settingView = settingView
         self.model = SettingModel(controller: self)
     }
-    
+    func onDeleteNotes() {
+        model?.deleteNotes()
+    }
     
 }

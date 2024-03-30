@@ -22,6 +22,7 @@ class HomeView: UIViewController {
         let view = UISearchBar()
         view.placeholder = "Поиск"
         view.backgroundImage = UIImage()
+        view.searchTextField.addTarget(self, action: #selector(searchBarEditing), for: .editingChanged)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -61,6 +62,15 @@ class HomeView: UIViewController {
         
     }()
     
+    private lazy var searchResultLabel: UILabel = {
+        let view = UILabel()
+        view.text = "Ничего не найдено по запросу..."
+        view.isHidden = true
+        view.textAlignment = .center
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -79,11 +89,15 @@ class HomeView: UIViewController {
     }
     
     
+    
     @objc private func addButtonTapped(){
         let addVc = AddNoteView()
         navigationController?.pushViewController(addVc, animated: true)
     }
-    
+    @objc func searchBarEditing(){
+        guard let text = noteSearchBar.text else {return}
+        controller?.onSearchNotes(text: text )
+    }
     
     private func navBarItem(){
         
@@ -104,6 +118,7 @@ class HomeView: UIViewController {
         view.addSubview(notesLabel)
         view.addSubview(notesCollectionView)
         view.addSubview(addButton)
+        view.addSubview(searchResultLabel)
         NSLayoutConstraint.activate([
             noteSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             noteSearchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -122,14 +137,15 @@ class HomeView: UIViewController {
             addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             addButton.widthAnchor.constraint(equalToConstant: 42),
             addButton.heightAnchor.constraint(equalToConstant: 42),
+            
+            searchResultLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            searchResultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
     
     
     @objc private func settingRightBarBTnTapped(){
         let settingsVC =  SettingsView()
-        
-        
         navigationController?.pushViewController(settingsVC, animated: true)
     }
     
@@ -153,15 +169,26 @@ extension HomeView: UICollectionViewDelegateFlowLayout{
         return CGSize(width: (view.frame.width - 60) / 2, height: 100)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let addNoteViewC = AddNoteView()
-        
-        navigationController?.pushViewController(addNoteViewC, animated: true)
+        let addNoteView = AddNoteView()
+        addNoteView.setNote(note: notes[indexPath.row])
+        navigationController?.pushViewController(addNoteView, animated: true)
     }
 }
 
 extension HomeView: HomeViewProtocol {
     func succsesNotes(notes: [Note]){
+        if notes.isEmpty {
+            searchResultLabel.isHidden = false
+        }else{
+            searchResultLabel.isHidden = true
+        }
         self.notes = notes
         notesCollectionView.reloadData()
     }
 }
+
+//extension HomeView: UISearchBarDelegate{
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print(searchText)
+//    }
+//}
