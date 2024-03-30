@@ -6,11 +6,12 @@
 //
 
 import UIKit
+
 class LanguageView: UIViewController{
-   
-    private var cellDates: [LanguagesStruct] = [LanguagesStruct(image: "kg", label: "Кыргызстан"),
-                                                LanguagesStruct(image: "rus", label: "Россия"),
-                                                LanguagesStruct(image: "us", label: "США"),
+    
+    private var cellDates: [LanguagesStruct] = [LanguagesStruct(image: "kg", label: "Кыргызча"),
+                                                LanguagesStruct(image: "rus", label: "Русский"),
+                                                LanguagesStruct(image: "us", label: "Англиский"),
     ]
     
     private lazy var labell: UILabel = {
@@ -22,15 +23,15 @@ class LanguageView: UIViewController{
         return lb
     }()
     
-    private lazy var backBtn: UIButton = {
-        let lb = UIButton()
-        lb.setImage(UIImage(named: "graber"), for: .normal)
-        lb.addTarget(self, action: #selector(backBtnTapped(_:)), for: .touchUpInside)
-        lb.translatesAutoresizingMaskIntoConstraints = false
-        return lb
-    }()
-    
-     lazy var languageTableView = UITableView()
+//    private lazy var backBtn: UIButton = {
+//        let lb = UIButton()
+//        lb.setImage(UIImage(named: "graber"), for: .normal)
+//        lb.addTarget(self, action: #selector(backBtnTapped(_:)), for: .touchUpInside)
+//        lb.translatesAutoresizingMaskIntoConstraints = false
+//        return lb
+//    }()
+//    
+    lazy var languageTableView = UITableView()
     
     
     override func viewDidLoad() {
@@ -42,21 +43,22 @@ class LanguageView: UIViewController{
     private func setupCon(){
         view.addSubview(labell)
         view.addSubview(languageTableView)
-        view.addSubview(backBtn)
+//        view.addSubview(backBtn)
         NSLayoutConstraint.activate([
             
-            backBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            backBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            backBtn.heightAnchor.constraint(equalToConstant: 5),
-            backBtn.widthAnchor.constraint(equalToConstant: 30),
-            
-            labell.topAnchor.constraint(equalTo: backBtn.bottomAnchor, constant: 30),
+//            backBtn.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+//            backBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            backBtn.heightAnchor.constraint(equalToConstant: 5),
+//            backBtn.widthAnchor.constraint(equalToConstant: 30),
+//            
+            labell.topAnchor.constraint(equalTo: view.topAnchor, constant: 56),
             labell.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             
             languageTableView.topAnchor.constraint(equalTo: labell.bottomAnchor, constant: 16),
-            languageTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            languageTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            languageTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -200),
+            languageTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
+            languageTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
+            languageTableView.heightAnchor.constraint(equalToConstant: 160)
+//            languageTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant:  -400),
             
         ])
         
@@ -64,6 +66,12 @@ class LanguageView: UIViewController{
         languageTableView.register(LanguageCell.self, forCellReuseIdentifier: LanguageCell.cellID)
         languageTableView.delegate = self
         languageTableView.translatesAutoresizingMaskIntoConstraints = false
+        languageTableView.backgroundColor = .systemGray5
+        languageTableView.layer.cornerRadius = 14
+    }
+    
+    private func localTextWords(){
+        labell.text =  "Choose language".localized()
     }
     
     @objc private func backBtnTapped(_ sender: UIButton){
@@ -73,7 +81,7 @@ class LanguageView: UIViewController{
 
 
 
-extension LanguageView: UITableViewDataSource, UITableViewDelegate {
+extension LanguageView: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cellDates.count
     }
@@ -84,8 +92,26 @@ extension LanguageView: UITableViewDataSource, UITableViewDelegate {
         cell.setDates(dates: language)
         return cell
     }
+}
+
+extension LanguageView:  UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        50
+    }
     
-   
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row{
+        case 0:
+            AppLanguageManager.shared.SetApplanguage(language: .kg)
+        case 1:
+            AppLanguageManager.shared.SetApplanguage(language: .ru)
+
+        case 2:
+            AppLanguageManager.shared.SetApplanguage(language: .usa)
+
+        default:
+            ()
+        }
+    }
 }
 

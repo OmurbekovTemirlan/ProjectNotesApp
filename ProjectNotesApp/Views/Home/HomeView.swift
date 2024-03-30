@@ -87,21 +87,9 @@ class HomeView: UIViewController {
         controller?.onGetNotes()
         navBarItem()
     }
-    
-    
-    
-    @objc private func addButtonTapped(){
-        let addVc = AddNoteView()
-        navigationController?.pushViewController(addVc, animated: true)
-    }
-    @objc func searchBarEditing(){
-        guard let text = noteSearchBar.text else {return}
-        controller?.onSearchNotes(text: text )
-    }
-    
     private func navBarItem(){
         
-        navigationItem.title = "Главная"
+        navigationItem.title = "Home".localized()
         
         navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
         
@@ -111,6 +99,21 @@ class HomeView: UIViewController {
         
         settingRightBtn.tintColor = UIColor(named: "OtherColor")
         
+    }
+    
+    @objc private func settingRightBarBTnTapped(){
+        let settingsVC =  SettingsView()
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
+    @objc private func addButtonTapped(){
+        let addVc = AddNoteView()
+        navigationController?.pushViewController(addVc, animated: true)
+    }
+    
+    @objc func searchBarEditing(){
+        guard let text = noteSearchBar.text else {return}
+        controller?.onSearchNotes(text: text )
     }
     
     private func setupUI(){
@@ -142,14 +145,9 @@ class HomeView: UIViewController {
             searchResultLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
     }
-    
-    
-    @objc private func settingRightBarBTnTapped(){
-        let settingsVC =  SettingsView()
-        navigationController?.pushViewController(settingsVC, animated: true)
-    }
-    
 }
+
+
 extension HomeView: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         notes.count
@@ -157,10 +155,13 @@ extension HomeView: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeViewCell.cellId, for: indexPath) as! HomeViewCell
-        cell.setup(title: notes[indexPath.row].title ?? "")
+        
+        let title = notes[indexPath.row].title ?? notes[indexPath.row].desc ?? ""
+        cell.setup(title: title)
         
         return cell
     }
+
     
     
 }
@@ -169,9 +170,9 @@ extension HomeView: UICollectionViewDelegateFlowLayout{
         return CGSize(width: (view.frame.width - 60) / 2, height: 100)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let addNoteView = AddNoteView()
-        addNoteView.setNote(note: notes[indexPath.row])
-        navigationController?.pushViewController(addNoteView, animated: true)
+        let vc = AddNoteView()
+        vc.setNote(note: notes[indexPath.row])
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -186,9 +187,3 @@ extension HomeView: HomeViewProtocol {
         notesCollectionView.reloadData()
     }
 }
-
-//extension HomeView: UISearchBarDelegate{
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        print(searchText)
-//    }
-//}

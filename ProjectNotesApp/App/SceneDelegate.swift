@@ -15,6 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        AppLanguageManager.shared.SetApplanguage(language: .kg)
         let window = UIWindow(windowScene: windowScene)
         let initialViev: UIViewController?
         

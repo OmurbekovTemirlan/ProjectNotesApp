@@ -102,6 +102,12 @@ extension SettingsView: UITableViewDelegate  {
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row == 0 {
                let vc = LanguageView()
+                let mult = 0.33
+                let customDetend = UISheetPresentationController.Detent.custom {context in vc.view.frame.height * mult}
+                if let sheet = vc.sheetPresentationController{
+                    sheet.detents = [customDetend]
+                    sheet.prefersGrabberVisible = true
+                }
                 present(vc, animated: true)
             }
             

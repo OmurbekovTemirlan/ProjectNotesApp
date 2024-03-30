@@ -22,8 +22,8 @@ class CoreDataService: NSObject {
         appDelegate.persistentContainer.viewContext
     }
     
-//    CRUD
-//    CREAT READ UPDATE DELETE
+    //    CRUD
+    //    CREAT READ UPDATE DELETE
     
     //creat
     func addNote(id: String, title: String, description: String, date: Date){
@@ -60,22 +60,36 @@ class CoreDataService: NSObject {
             }
             context.delete(note)
         }catch {
-            
+            print(error.localizedDescription)
         }
+        appDelegate.saveContext()
     }
+    
+    func deleteNotes(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        do {
+            let notes = try context.fetch(fetchRequest) as! [Note]
+            notes.forEach({note in context.delete(note)})
+        }catch {
+            print(error.localizedDescription)
+        }
+        appDelegate.saveContext() 
+    }
+    // update
+    func updateNotes(id: String, title: String, description: String){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
+        do {
+            guard let notes = try context.fetch(fetchRequest) as? [Note], let note = notes.first(where: {note in id == note.id
+            })else {
+                return
+            }
+            note.id = id
+            note.title = title
+            note.desc = description
+        } catch {
+            print(error.localizedDescription)
+        }
+        appDelegate.saveContext()
+    }
+    
 }
-
-//func deleteNotes(){
-//    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
-//    do {
-//        let notes = try context.fetch(fetchRequest) as! [Note]
-//        notes.forEach({ note in context.delete(note)
-//        })
-//    }catch {
-//        
-//    }
-//}
-//func updateNote(id: String, title: String, description: String){
-//   let fetchrequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Note")
-//    
-//}
