@@ -36,6 +36,7 @@
 		189E8DCE2BB6271C00429152 /* LanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DCD2BB6271C00429152 /* LanguageCell.swift */; };
 		189E8DD32BB7048300429152 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 189E8DD52BB7048300429152 /* Localizable.strings */; };
 		189E8DDA2BB7051900429152 /* AppLanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E8DD92BB7051900429152 /* AppLanguageManager.swift */; };
+		18A7F0242BBC499F000E947E /* Extension + Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7F0232BBC499F000E947E /* Extension + Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		189E8DD62BB7049700429152 /* ky-KG */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ky-KG"; path = "ky-KG.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		189E8DD72BB7049900429152 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		189E8DD92BB7051900429152 /* AppLanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguageManager.swift; sourceTree = "<group>"; };
+		18A7F0232BBC499F000E947E /* Extension + Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				189E4F7A2BA2ED3900972C5F /* App */,
+				18A7F0222BBC497D000E947E /* HelpersFiles */,
 				189E8DBF2BB21B0700429152 /* Services */,
 				189E8DD82BB704E500429152 /* Managers */,
 				189E4F7B2BA2ED4600972C5F /* Views */,
@@ -220,6 +223,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		18A7F0222BBC497D000E947E /* HelpersFiles */ = {
+			isa = PBXGroup;
+			children = (
+				18A7F0232BBC499F000E947E /* Extension + Color.swift */,
+			);
+			path = HelpersFiles;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -297,6 +308,7 @@
 				189E8DBA2BB2188E00429152 /* Note.xcdatamodeld in Sources */,
 				189E8D662BAAE39C00429152 /* SettingController.swift in Sources */,
 				189E4F802BA3144E00972C5F /* SettingCell.swift in Sources */,
+				18A7F0242BBC499F000E947E /* Extension + Color.swift in Sources */,
 				189E8DCC2BB625B300429152 /* LanguageView.swift in Sources */,
 				189E4F832BA32C1800972C5F /* SetttingModel.swift in Sources */,
 				189E4F862BA3448700972C5F /* Color.swift in Sources */,

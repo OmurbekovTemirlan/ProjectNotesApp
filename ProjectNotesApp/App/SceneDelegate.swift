@@ -15,9 +15,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
-        AppLanguageManager.shared.SetApplanguage(language: .kg)
+        
+        
         let window = UIWindow(windowScene: windowScene)
         let initialViev: UIViewController?
+        
+        if let selectedLanguage = AppLanguageManager.shared.getSelectedanguage() {
+            AppLanguageManager.shared.setApplanguage(language: LanguageType(rawValue: selectedLanguage.rawValue) ?? .kg)
+        }
         
         if UserDefaults.standard.bool(forKey: "IsOnBord") == true{
             initialViev = HomeView()
@@ -31,7 +36,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         self.window = window
         window.overrideUserInterfaceStyle = MTUserDefaults.shared.theme.getUSerInterfaceStyle()
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

@@ -7,5 +7,19 @@
 */
 
 "Home" = "Home";
+"Search" = "Search";
+"Settings" = "Settings";
+"Language" = "Language";
+"Dark theme" = "Dark theme";
+"Clear dates" = "Clear dates";
+"Delete" = "Delete";
+"You sure you want to delete all notes?" = "You sure you want to delete all notes?";
+"Yes" = "Yes";
+"No" = "No";
+"Save" = "Save";
+"Title"  = "Title";
+"Are you sure you want to delete the notes?" = "Are you sure you want to delete the notes?";
 "Choose language" = "Choose language";
-
+"Nothing found for the request..." = "Nothing found for the request...";
+"Add text" = "Add text";
+"Notes" = "Notes";

@@ -6,14 +6,19 @@
 //
 
 import Foundation
+import UIKit
 
 enum LanguageType: String{
-    case kg = "KG"
-    case ru = "RUS"
-    case usa = "USA"
+    case kg = "ky-KG"
+    case ru = "ru"
+    case en = "en"
 }
+
 class AppLanguageManager{
+    
     static let shared = AppLanguageManager()
+    
+    private let selectedLanguageKey = "selectedLanguage"
     
     private var currentLanguage: LanguageType?
     
@@ -35,12 +40,21 @@ class AppLanguageManager{
         currentBundle = langBundle
     }
     
-    func SetApplanguage(language: LanguageType){
+    func setApplanguage(language: LanguageType){
         setCurrentLanguage(language: language)
         setCurrentBundlePath(languageCode: language.rawValue)
     }
+    private func savedSelectedLanguage(_ language: String){
+        UserDefaults.standard.setValue(language, forKey: selectedLanguageKey)
+    }
+    func getSelectedanguage() -> LanguageType? {
+        guard let languageString = UserDefaults.standard.string(forKey: selectedLanguageKey), let languageType = LanguageType(rawValue: languageString) else {
+            return nil
+        }
+        return languageType
+    }
 }
-
+                         
 extension String{
     func localized() -> String {
         let bundle = AppLanguageManager.shared.bundle

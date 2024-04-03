@@ -60,7 +60,7 @@ class OnBordingView: UIViewController {
     private lazy var nextBtn: UIButton = {
         let view = UIButton(type: .system)
         view.setTitle("Next", for: .normal)
-        view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1) /*UIColor(hex: "#FF3D3D" )*/
+        view.backgroundColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         view.layer.cornerRadius = 12
         view.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
         view.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
@@ -118,7 +118,7 @@ class OnBordingView: UIViewController {
     }
     
     @objc private func nextButtonTapped(_ sender: Any) {
-        if currentPagess == 1 { 
+        if currentPagess == 1 {
             UserDefaults.standard.set(true, forKey: "IsOnBord")
         }
         
@@ -131,18 +131,6 @@ class OnBordingView: UIViewController {
         
         test()
     }
-
-    
-//    @objc private func nextButtonTapped(_ seender: Any) {
-//        UserDefaults.standard.set(true, forKey: "IsOnBord")
-//        if currentPagess < OnBordingStucts.count - 1 {
-//            currentPagess += 1
-//            scrollToCurrentPage(animated: true)
-//        } else {
-//            transitionToHomeView()
-//        }
-//        test()
-//    }
     
     private func scrollToCurrentPage(animated: Bool) {
         let indexPath = IndexPath(item: currentPagess, section: 0)
@@ -165,7 +153,7 @@ class OnBordingView: UIViewController {
         let vc = HomeView()
         navigationController?.pushViewController(vc, animated: true)
     }
- 
+    
     @objc private func skipBtnTapped(_ sender: UIButton){
         let vc = HomeView()
         navigationController?.pushViewController(vc, animated: true)

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingViewProtocol: AnyObject{
-   
+    
 }
 
 
@@ -18,9 +18,9 @@ class SettingsView: UIViewController, SettingViewProtocol {
     var controller: SettingControllerProtocol?
     
     
-   private lazy var dates: [Settings] = [Settings(nameLabel: "Язык", imageName: "globe", discription: "Русский", type: .withRightBtn),
-                             Settings(nameLabel: "Темная тема", imageName: "moon", discription: "", type: .withSwitch),
-                             Settings(nameLabel: "Очистить данные", imageName: "trash", discription: "", type: .usaul)]
+    private lazy var dates: [Settings] = [Settings(nameLabel: "Language".localized(), imageName: "globe", discription: "Русский", type: .withRightBtn),
+                                          Settings(nameLabel: "Dark theme".localized(), imageName: "moon", discription: "", type: .withSwitch),
+                                          Settings(nameLabel: "Clear dates".localized(), imageName: "trash", discription: "", type: .usaul)]
     
     let cellId = "SettingCell"
     
@@ -31,29 +31,34 @@ class SettingsView: UIViewController, SettingViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        NavBarEdits()
+        
         controller = SettingController(settingView: self)
         setupTableView()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navBarEdits()
+    }
     
-   
     
-    private func NavBarEdits() {
+    private func navBarEdits() {
         
-        navigationItem.title = "Настройки"
+        navigationItem.title = "Settings".localized()
         navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
-
         
+    }
     
-//        let rightBarBtn = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(settingBtnTapped))
-//        navigationItem.rightBarButtonItem = rightBarBtn
-//        rightBarBtn.tintColor = UIColor(named: "OtherColor")
- 
+    private func locallizeWords(){
+        navBarEdits()
+        dates = [Settings(nameLabel: "Language".localized(), imageName: "globe", discription: "Русский", type: .withRightBtn),
+                 Settings(nameLabel: "Dark theme".localized(), imageName: "moon", discription: "", type: .withSwitch),
+                 Settings(nameLabel: "Clear dates".localized(), imageName: "trash", discription: "", type: .usaul)]
+        settingsTableView.reloadData()
     }
     
     private func setupTableView(){
         view.addSubview(settingsTableView)
-
+        
         NSLayoutConstraint.activate([
             settingsTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor),
             settingsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
@@ -99,45 +104,55 @@ extension SettingsView: UITableViewDelegate  {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         51
     }
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if indexPath.row == 0 {
-               let vc = LanguageView()
-                let mult = 0.33
-                let customDetend = UISheetPresentationController.Detent.custom {context in vc.view.frame.height * mult}
-                if let sheet = vc.sheetPresentationController{
-                    sheet.detents = [customDetend]
-                    sheet.prefersGrabberVisible = true
-                }
-                present(vc, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let vc = LanguageView()
+            vc.delegate = self
+            let mult = 0.33
+            let customDetend = UISheetPresentationController.Detent.custom {context in vc.view.frame.height * mult}
+            if let sheet = vc.sheetPresentationController{
+                sheet.detents = [customDetend]
+                sheet.prefersGrabberVisible = true
             }
-            
-            if indexPath.row == 2 {
-                
-                let alert = UIAlertController(title: "Удаление", message: "Вы уверены, что хотите удалить все заметки?", preferredStyle: .alert)
-                
-                let acceptAction = UIAlertAction(title: "Да", style: .destructive)
-                { action in self.controller?.onDeleteNotes() }
-                    
-                let declineAction = UIAlertAction(title: "Нет", style: .cancel)
-                
-                alert.addAction(acceptAction)
-                alert.addAction(declineAction)
-              
-                present(alert, animated: true)
-            }
+            present(vc, animated: true)
         }
+        
+        if indexPath.row == 2 {
+            
+            let alert = UIAlertController(title: "Delete".localized(), message: "You sure you want to delete all notes?".localized(), preferredStyle: .alert)
+            
+            let acceptAction = UIAlertAction(title: "Yes".localized(), style: .destructive)
+            { action in self.controller?.onDeleteNotes() }
+            
+            let declineAction = UIAlertAction(title: "No".localized(), style: .cancel)
+            
+            alert.addAction(acceptAction)
+            alert.addAction(declineAction)
+            
+            present(alert, animated: true)
+        }
+    }
+}
+
+extension SettingsView: SettingsCellDelegate{
+    func didSwitchOn(isOn: Bool) {
+        
+        UserDefaults.standard.setValue(isOn, forKey: "isDarkTheme")
+        
+        if isOn == true {
+            view.overrideUserInterfaceStyle = .dark
+        }else{
+            view.overrideUserInterfaceStyle = .light
+        }
+    }
+}
+
+extension SettingsView: LanguageViewDelegate{
+    
+    func didLanguageChoose() {
+        
+        locallizeWords()
+        
     }
     
-    extension SettingsView: SettingsCellDelegate{
-        func didSwitchOn(isOn: Bool) {
-            
-            UserDefaults.standard.setValue(isOn, forKey: "isDarkTheme")
-            
-            if isOn == true {
-                view.overrideUserInterfaceStyle = .dark
-            }else{
-                view.overrideUserInterfaceStyle = .light
-            }
-        }
-    }
-
+}

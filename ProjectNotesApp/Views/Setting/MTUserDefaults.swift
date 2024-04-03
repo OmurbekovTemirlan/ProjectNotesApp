@@ -19,5 +19,4 @@ struct MTUserDefaults {
             UserDefaults.standard.set(newValue.rawValue, forKey: "themes")
         }
     }
-    
 }

@@ -13,7 +13,7 @@ enum SettingType{
     case usaul
 }
 
-struct Settings  {
+struct Settings {
     var nameLabel: String
     var imageName: String
     var discription: String
@@ -132,8 +132,10 @@ class SettingTableViewCell: UITableViewCell {
             russianBtn.setImage(UIImage(systemName: "chevron.right"), for: .normal)
             russianBtn.semanticContentAttribute = .forceRightToLeft
             switchControl.isHidden = true
+            russianBtn.isHidden = false
         }else if settings.type == .withSwitch{
             russianBtn.isHidden = true
+            switchControl.isHidden = false
             
         }else if settings.type == .usaul {
             switchControl.isHidden = true

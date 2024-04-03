@@ -6,4 +6,19 @@
   
 */
 "Home" = "Главная";
+"Search" = "Поиск";
+"Settings" = "Настройки";
+"Language" = "Язык";
+"Dark theme" = "Темная Тема";
+"Clear dates" = "Очистить данные";
+"Delete" = "Удаление";
+"You sure you want to delete all notes?" = "Вы уверены, что хотите удалить все заметки?";
+"Yes" = "Да";
+"No" = "Нет";
+"Save" = "Сохранить";
+"Title" = "Название";
+"Are you sure you want to delete the notes?" = "Вы уверены, что хотите удалить заметки?";
 "Choose language" = "Выберите язык";
+"Nothing found for the request..." = "Ничего не найдено по запросу...";
+"Add text" = "Добавьте заметки";
+"Notes" = "Заметки";

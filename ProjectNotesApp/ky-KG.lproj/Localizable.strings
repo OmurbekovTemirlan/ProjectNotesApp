@@ -6,5 +6,19 @@
   
 */
 "Home" = "Башкы экран";
-"Choose language" = "Тилди танданыз";
-
+"Search" = "Издоо";
+"Settings" = "Ондоолор";
+"Language" = "Тилдер";
+"Dark theme" = "Кара тема";
+"Clear dates" = "Маалыматтарды тазалоо";
+"Delete" = "Очуруу";
+"You sure you want to delete all notes?" = "Бардык жазмаларды жок кыласызбы?";
+"Yes" = "Ооба";
+"No" = "Жок";
+"Save" = "Сактоо";
+"Title" = "Аты";
+"Are you sure you want to delete the notes?" = "Кундолукту жок кыласызбы?";
+"Choose language" = "Тилди танда";
+"Nothing found for the request..." = "Суроо боюнча эч нерсе тапкан жок...";
+"Add text" = "Кундолукту толтурунуз";
+"Notes" = "Кундолуктор";

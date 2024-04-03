@@ -18,9 +18,13 @@ class HomeView: UIViewController {
     
     private var notes: [Note] = []
     
+    private var isSearching: Bool = false
+    
+//    private var tapGastureReconizer
+    
     private lazy var noteSearchBar: UISearchBar = {
         let view = UISearchBar()
-        view.placeholder = "Поиск"
+        view.placeholder = "Search".localized()
         view.backgroundImage = UIImage()
         view.searchTextField.addTarget(self, action: #selector(searchBarEditing), for: .editingChanged)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,7 +33,7 @@ class HomeView: UIViewController {
     
     private lazy var notesLabel: UILabel = {
         let view = UILabel()
-        view.text = "Заметки"
+        view.text = "Notes".localized()
         view.textColor = UIColor(named: "OtherColor")
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -64,7 +68,7 @@ class HomeView: UIViewController {
     
     private lazy var searchResultLabel: UILabel = {
         let view = UILabel()
-        view.text = "Ничего не найдено по запросу..."
+        view.text = "Nothing found for the request...".localized()
         view.isHidden = true
         view.textAlignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +82,8 @@ class HomeView: UIViewController {
         
         setupUI()
         controller?.onGetNotes()
-        
+       addGestureReconizer()
+        setLanguage()
         navigationItem.hidesBackButton = true
         
     }
@@ -86,6 +91,7 @@ class HomeView: UIViewController {
         super.viewWillAppear(animated)
         controller?.onGetNotes()
         navBarItem()
+        setLanguage()
     }
     private func navBarItem(){
         
@@ -101,6 +107,12 @@ class HomeView: UIViewController {
         
     }
     
+    func setLanguage(){
+        noteSearchBar.placeholder = "Search".localized()
+        notesLabel.text = "Notes".localized()
+        searchResultLabel.text = "Nothing found for the request...".localized()
+    }
+
     @objc private func settingRightBarBTnTapped(){
         let settingsVC =  SettingsView()
         navigationController?.pushViewController(settingsVC, animated: true)
@@ -111,8 +123,27 @@ class HomeView: UIViewController {
         navigationController?.pushViewController(addVc, animated: true)
     }
     
+    private func addGestureReconizer(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(resignSearchBar))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func resignSearchBar(){
+//        view.endEditing(true)
+        noteSearchBar.text = ""
+//        controller?.onGetNotes()
+        noteSearchBar.resignFirstResponder()
+        if notes.isEmpty {
+            searchResultLabel.text = "Add text".localized()
+        }else{
+            searchResultLabel.text = ""
+        }
+    }
+    
     @objc func searchBarEditing(){
         guard let text = noteSearchBar.text else {return}
+        isSearching = true
         controller?.onSearchNotes(text: text )
     }
     
@@ -187,3 +218,4 @@ extension HomeView: HomeViewProtocol {
         notesCollectionView.reloadData()
     }
 }
+

@@ -24,7 +24,7 @@ class AddNoteView: UIViewController {
     
     private lazy var noteSearchBar: UISearchBar = {
         let view = UISearchBar()
-        view.placeholder = "Название"
+        view.placeholder = "Title".localized()
         view.backgroundImage = UIImage()
         if let note = notes{
             view.text = note.title
@@ -47,7 +47,7 @@ class AddNoteView: UIViewController {
     
     private lazy var saveBtn: UIButton = {
         let view = UIButton(type: .system)
-        view.setTitle("Сохранит", for: .normal)
+        view.setTitle("Save".localized(), for: .normal)
         view.backgroundColor = .systemGray
         view.layer.cornerRadius = 12
         view.setTitleColor(UIColor(hex: "#FFFFFF"), for: .normal)
@@ -65,7 +65,7 @@ class AddNoteView: UIViewController {
     }
     
     private func navBarItem(){
-        navigationItem.title = "Заметки"
+        navigationItem.title = "Notes".localized()
         navigationItem.titleView?.tintColor = UIColor(named: "OtherColor")
         
         
@@ -142,12 +142,12 @@ class AddNoteView: UIViewController {
     
     private func deleteFunc(){
         guard let note = notes else {return}
-        let alert = UIAlertController(title: "Удаление", message: "Вы уверены, что хотите удалить заметки?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete".localized(), message: "Are you sure you want to delete the notes?".localized(), preferredStyle: .alert)
         
-        let acceptAction = UIAlertAction(title: "Да", style: .destructive)
+        let acceptAction = UIAlertAction(title: "Yes".localized(), style: .destructive)
         { action in self.controller?.onDelete(id: note.id ?? "") }
         
-        let declineAction = UIAlertAction(title: "Нет", style: .cancel)
+        let declineAction = UIAlertAction(title: "No".localized(), style: .cancel)
         
         alert.addAction(acceptAction)
         alert.addAction(declineAction)
