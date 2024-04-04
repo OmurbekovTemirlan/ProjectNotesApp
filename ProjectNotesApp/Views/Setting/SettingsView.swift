@@ -67,22 +67,13 @@ class SettingsView: UIViewController, SettingViewProtocol {
             
             
         ])
-        
+        settingsTableView.isScrollEnabled = false
         settingsTableView.dataSource = self
         settingsTableView.delegate = self
         settingsTableView.register(SettingTableViewCell.self, forCellReuseIdentifier: cellId)
         settingsTableView.translatesAutoresizingMaskIntoConstraints = false
         
     }
-    
-    
-    @objc private func settingBtnTapped(){
-        
-    }
-    @objc private func BackBtnTapped(){
-        
-    }
-    
     
 }
 extension SettingsView: UITableViewDataSource {

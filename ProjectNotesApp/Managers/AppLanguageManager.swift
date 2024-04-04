@@ -18,8 +18,6 @@ class AppLanguageManager{
     
     static let shared = AppLanguageManager()
     
-    private let selectedLanguageKey = "selectedLanguage"
-    
     private var currentLanguage: LanguageType?
     
     private var currentBundle: Bundle = Bundle.main
@@ -43,12 +41,13 @@ class AppLanguageManager{
     func setApplanguage(language: LanguageType){
         setCurrentLanguage(language: language)
         setCurrentBundlePath(languageCode: language.rawValue)
+        savedSelectedLanguage(language.rawValue)
     }
     private func savedSelectedLanguage(_ language: String){
-        UserDefaults.standard.setValue(language, forKey: selectedLanguageKey)
+        UserDefaults.standard.setValue(language, forKey: "selectedLanguage")
     }
     func getSelectedanguage() -> LanguageType? {
-        guard let languageString = UserDefaults.standard.string(forKey: selectedLanguageKey), let languageType = LanguageType(rawValue: languageString) else {
+        guard let languageString = UserDefaults.standard.string(forKey: "selectedLanguage"), let languageType = LanguageType(rawValue: languageString) else {
             return nil
         }
         return languageType

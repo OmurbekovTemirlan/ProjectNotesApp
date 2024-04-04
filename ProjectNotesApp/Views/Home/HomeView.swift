@@ -94,6 +94,10 @@ class HomeView: UIViewController {
         setLanguage()
     }
     private func navBarItem(){
+       
+        let backButton = UIBarButtonItem()
+        backButton.title = "".localized()
+        navigationItem.backBarButtonItem = backButton
         
         navigationItem.title = "Home".localized()
         
@@ -108,6 +112,7 @@ class HomeView: UIViewController {
     }
     
     func setLanguage(){
+        
         noteSearchBar.placeholder = "Search".localized()
         notesLabel.text = "Notes".localized()
         searchResultLabel.text = "Nothing found for the request...".localized()

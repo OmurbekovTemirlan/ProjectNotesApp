@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let initialViev: UIViewController?
         
-        if let selectedLanguage = AppLanguageManager.shared.getSelectedanguage() {
-            AppLanguageManager.shared.setApplanguage(language: LanguageType(rawValue: selectedLanguage.rawValue) ?? .kg)
+        let savedLanguage = UserDefaults.standard.string(forKey: "selectedLanguage")
+        if savedLanguage == "ky-KG" {
+            AppLanguageManager.shared.setApplanguage(language: .kg)
+        }else if savedLanguage == "ru"{
+            AppLanguageManager.shared.setApplanguage(language: .ru)
+        }else if savedLanguage == "en"{
+            AppLanguageManager.shared.setApplanguage(language: .en)
         }
         
         if UserDefaults.standard.bool(forKey: "IsOnBord") == true{
